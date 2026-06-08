@@ -1,0 +1,135 @@
+.pokemon-list-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  flex: 1;
+}
+
+.pokemon-list-container h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  color: #dc0000;
+  font-weight: 900;
+  font-family: var(--heading);
+}
+
+.pokemon-list-container > p {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.no-results-text {
+  color: #666;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 40px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.spinner {
+  border: 5px solid #f0f0f0;
+  border-top: 5px solid #dc0000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container p {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1rem;
+  padding: 32px;
+  text-align: center;
+  background: rgba(211, 47, 47, 0.08);
+  border-radius: 8px;
+  border-left: 4px solid #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .pokemon-list-container {
+    padding: 24px 16px;
+  }
+
+  .pokemon-list-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokemon-grid {
+    grid-template-columns: 1fr;
+  }
+}

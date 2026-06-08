@@ -1,0 +1,175 @@
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8e8e8;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(220, 0, 0, 0.15);
+}
+
+.card-image {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(220, 0, 0, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-name {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-transform: capitalize;
+  font-family: var(--heading);
+}
+
+.card-types {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.type {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.type-normal {
+  background-color: #A8A878;
+}
+
+.type-fire {
+  background: linear-gradient(135deg, #F08030, #E84008);
+}
+
+.type-water {
+  background: linear-gradient(135deg, #6890F0, #4070D0);
+}
+
+.type-electric {
+  background: linear-gradient(135deg, #F8D030, #E0B020);
+  color: #333;
+}
+
+.type-grass {
+  background: linear-gradient(135deg, #78C850, #60A040);
+}
+
+.type-ice {
+  background: linear-gradient(135deg, #98D8D8, #78B8B8);
+  color: #333;
+}
+
+.type-fighting {
+  background: linear-gradient(135deg, #C03028, #A01820);
+}
+
+.type-poison {
+  background: linear-gradient(135deg, #A040A0, #802080);
+}
+
+.type-ground {
+  background: linear-gradient(135deg, #E0C068, #C8A840);
+  color: #333;
+}
+
+.type-flying {
+  background: linear-gradient(135deg, #A890F0, #8870D0);
+}
+
+.type-psychic {
+  background: linear-gradient(135deg, #F85888, #E04060);
+}
+
+.type-bug {
+  background: linear-gradient(135deg, #A8B820, #889000);
+}
+
+.type-rock {
+  background: linear-gradient(135deg, #B8A038, #A08020);
+}
+
+.type-ghost {
+  background: linear-gradient(135deg, #705898, #504878);
+}
+
+.type-dragon {
+  background: linear-gradient(135deg, #7038F8, #5028D8);
+}
+
+.type-dark {
+  background: linear-gradient(135deg, #705848, #503830);
+}
+
+.type-steel {
+  background: linear-gradient(135deg, #B8B8D0, #989BC8);
+  color: #333;
+}
+
+.type-fairy {
+  background: linear-gradient(135deg, #EE99AC, #E8789C);
+}
+
+.card-stats {
+  font-size: 13px;
+  color: #666;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.card-stats p {
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-stats strong {
+  color: #333;
+  font-weight: 600;
+}
