@@ -11,12 +11,18 @@ export const fetchPokemon = createAsyncThunk(
     const data = await response.json()
     return {
       name: data.name,
-      image: data.sprites.other['official-artwork'].front_default || data.sprites.front_default,
+      image: data.sprites.other?.['official-artwork']?.front_default || data.sprites.front_default,
+      sprites: data.sprites,
       types: data.types.map((t) => t.type.name),
       height: `${data.height / 10}m`,
       weight: `${data.weight / 10}kg`,
       order: data.order,
       grido: data.forms?.[0]?.name || '',
+      abilities: data.abilities.map((a) => a.ability.name),
+      stats: data.stats.map((s) => ({ name: s.stat.name, value: s.base_stat })),
+      moves: data.moves.slice(0, 8).map((m) => m.move.name),
+      latest: `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${data.id}.ogg`,
+      legacy: `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/${data.id}.ogg`,
       id: data.id,
     }
   }

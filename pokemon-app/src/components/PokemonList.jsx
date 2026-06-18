@@ -4,10 +4,12 @@ import { fetchPokemonList } from '../store/pokemonSlice'
 import { PokemonCard } from './PokemonCard'
 import { SearchBar } from './SearchBar'
 import './PokemonList.css'
+import { useNavigate } from 'react-router-dom'
 
 export function PokemonList() {
   const dispatch = useDispatch()
   const { list, loading, error, searchTerm } = useSelector((state) => state.pokemon)
+  const navigate = useNavigate()
 
   // Filtrare e ordinare i Pokemon in base alla ricerca (prefix match: startsWith)
   const filteredList = useMemo(() => {
@@ -71,8 +73,10 @@ export function PokemonList() {
       <div className="pokedex-header">
         <h1>POKÉDEX</h1>
         <p>Gotta catch 'em all! ({list.length} Pokémon)</p>
+    
       </div>
       <SearchBar />
+       
       <div className="pokemon-list-container">
         {filteredList.length === 0 && !loading ? (
           <div className="no-results">
@@ -83,7 +87,11 @@ export function PokemonList() {
         ) : (
           <div className="pokemon-grid">
             {filteredList.map((pokemon) => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              <PokemonCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                onClick={() => navigate(`/pokemon/${pokemon.name}`)}
+              />
             ))}
           </div>
         )}
