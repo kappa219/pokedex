@@ -63,6 +63,11 @@
 .pd-sprites { display:flex; gap:10px; align-items:center }
 .pd-sprites img { width:64px; height:64px; object-fit:contain; border-radius:8px; background:#fff; padding:6px; box-shadow:0 6px 16px rgba(16,42,67,0.06) }
 
+.sprite-thumb { cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; border: 2px solid transparent }
+.sprite-thumb:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(16,42,67,0.12) }
+.sprite-thumb:focus { outline: none; box-shadow: 0 10px 30px rgba(43,108,176,0.16) }
+.sprite-thumb.active { border-color: rgba(43,108,176,0.9); box-shadow: 0 12px 28px rgba(43,108,176,0.12) }
+
 .back-button {
   display:inline-flex;
   align-items:center;

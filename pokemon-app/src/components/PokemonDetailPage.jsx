@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPokemon } from '../store/pokemonSlice'
@@ -10,9 +10,15 @@ export function PokemonDetailPage() {
   const navigate = useNavigate()
   const { single, loading, error } = useSelector((state) => state.pokemon)
 
+  const [selectedImage, setSelectedImage] = useState(null)
+
   useEffect(() => {
     if (name) dispatch(fetchPokemon(name))
   }, [dispatch, name])
+
+  useEffect(() => {
+    setSelectedImage(single?.image ?? null)
+  }, [single])
 
   if (loading) {
     return (
@@ -53,14 +59,41 @@ export function PokemonDetailPage() {
       <div className="pd-page-content">
         <aside className="pd-aside">
           <div className="pd-image">
-            <img src={p.image} alt={p.name} />
+            <img src={selectedImage || p.image} alt={p.name} />
           </div>
           <div className="pd-sprites">
             {p.sprites && (
               <>
-                {p.sprites.front_default && <img src={p.sprites.front_default} alt="front" />}
-                {p.sprites.back_default && <img src={p.sprites.back_default} alt="back" />}
-                {p.sprites.front_shiny && <img src={p.sprites.front_shiny} alt="front shiny" />}
+                {p.sprites.front_default && (
+                  <img
+                    src={p.sprites.front_default}
+                    alt="front"
+                    className={`sprite-thumb ${selectedImage === p.sprites.front_default ? 'active' : ''}`}
+                    tabIndex={0}
+                    onClick={() => setSelectedImage(p.sprites.front_default)}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setSelectedImage(p.sprites.front_default)}
+                  />
+                )}
+                {p.sprites.back_default && (
+                  <img
+                    src={p.sprites.back_default}
+                    alt="back"
+                    className={`sprite-thumb ${selectedImage === p.sprites.back_default ? 'active' : ''}`}
+                    tabIndex={0}
+                    onClick={() => setSelectedImage(p.sprites.back_default)}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setSelectedImage(p.sprites.back_default)}
+                  />
+                )}
+                {p.sprites.front_shiny && (
+                  <img
+                    src={p.sprites.front_shiny}
+                    alt="front shiny"
+                    className={`sprite-thumb ${selectedImage === p.sprites.front_shiny ? 'active' : ''}`}
+                    tabIndex={0}
+                    onClick={() => setSelectedImage(p.sprites.front_shiny)}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setSelectedImage(p.sprites.front_shiny)}
+                  />
+                )}
               </>
             )}
           </div>
