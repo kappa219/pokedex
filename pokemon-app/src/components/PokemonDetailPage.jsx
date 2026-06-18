@@ -49,8 +49,43 @@ export function PokemonDetailPage() {
 
   const p = single
 
+  const TYPE_COLORS = {
+    normal: '#A8A878',
+    fire: '#F08030',
+    water: '#6890F0',
+    electric: '#F8D030',
+    grass: '#78C850',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    dark: '#705848',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+  }
+
+  function getPageBackground(types) {
+    if (!types || types.length === 0) return undefined
+    const t0 = types[0]?.toLowerCase()
+    const t1 = types[1]?.toLowerCase()
+    const c0 = TYPE_COLORS[t0] || '#eef6ff'
+    const c1 = TYPE_COLORS[t1] || null
+    if (c1) {
+      return `linear-gradient(135deg, ${c0}33, ${c0}99 40%, ${c1}99)`
+    }
+    return `linear-gradient(180deg, ${c0}20, ${c0}66)`
+  }
+
+  const pageBg = getPageBackground(p?.types)
+
   return (
-    <div className="pd-page">
+    <div className="pd-page" style={pageBg ? { background: pageBg } : undefined}>
       <header className="pokedex-header">
         <button className="back-button" onClick={() => navigate(-1)}>Indietro</button>
         <h1>Dettaglio: {p.name}</h1>
