@@ -5,12 +5,12 @@ import './App.css'
 
 function App() {
   return (
-    <h1>Pokedex</h1>
-    // <Routes>
-    //   <Route path="/" element={<PokemonList />} />
-    //   <Route path="/pokemon/:name" element={<PokemonDetailPage />} />
-    //   <Route path="*" element={<h1>ROUTE NOT FOUND</h1>} />
-    // </Routes>
+  
+    <Routes>
+      <Route path="/" element={<PokemonList />} />
+      <Route path="/pokemon/:name" element={<PokemonDetailPage />} />
+      <Route path="*" element={<h1>ROUTE NOT FOUND</h1>} />
+    </Routes>
   )
 }
 
