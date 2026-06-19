@@ -96,7 +96,7 @@ export function PokemonList() {
         )}
       </div>
       <footer className="pokedex-footer">
-        <p>TantaFame Companyin Manno</p>
+        <p>TantaFame Companyin Mannoo</p>
       </footer>
     </>
   )
