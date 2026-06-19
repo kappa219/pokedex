@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPokemon } from '../store/pokemonSlice'
@@ -11,6 +11,9 @@ export function PokemonDetailPage() {
   const { single, loading, error } = useSelector((state) => state.pokemon)
 
   const [selectedImage, setSelectedImage] = useState(null)
+  const imageRef = useRef(null)
+  const rafRef = useRef(null)
+  const pointerRef = useRef({ x: 0, y: 0, rect: null })
 
   useEffect(() => {
     if (name) dispatch(fetchPokemon(name))
@@ -19,6 +22,12 @@ export function PokemonDetailPage() {
   useEffect(() => {
     setSelectedImage(single?.image ?? null)
   }, [single])
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
 
   if (loading) {
     return (
@@ -93,8 +102,38 @@ export function PokemonDetailPage() {
 
       <div className="pd-page-content">
         <aside className="pd-aside">
-          <div className="pd-image">
-            <img src={selectedImage || p.image} alt={p.name} />
+          <div
+            className="pd-image"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect()
+              pointerRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top, rect }
+              if (!rafRef.current) {
+                rafRef.current = requestAnimationFrame(() => {
+                  rafRef.current = null
+                  const img = imageRef.current
+                  if (!img) return
+                  const r = pointerRef.current.rect
+                  const w = r.width
+                  const h = r.height
+                  const px = (pointerRef.current.x / w) - 0.5
+                  const py = (pointerRef.current.y / h) - 0.5
+                  const rotateY = px * 12
+                  const rotateX = -py * 10
+                  const translateX = px * 12
+                  const translateY = py * 8
+                  img.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(${translateX}px, ${translateY}px, 0)`
+                })
+              }
+            }}
+            onMouseLeave={() => {
+              const img = imageRef.current
+              if (!img) return
+              img.style.transition = 'transform 420ms cubic-bezier(.2,.9,.2,1)'
+              img.style.transform = 'none'
+              setTimeout(() => { if (img) img.style.transition = '' }, 450)
+            }}
+          >
+            <img ref={imageRef} src={selectedImage || p.image} alt={p.name} />
           </div>
           <div className="pd-sprites">
             {p.sprites && (
