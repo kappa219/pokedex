@@ -53,7 +53,6 @@ export function PokemonList() {
     return (
       <>
         <div className="pokedex-header">
-          <h1>POKÉDEX</h1>
           <p>Gotta catch 'em all!</p>
         </div>
         <div className="pokemon-list-container">
@@ -71,7 +70,7 @@ export function PokemonList() {
   return (
     <>
       <div className="pokedex-header">
-        <h1>POKÉDEX</h1>
+        <h1>POKÉDEXX</h1>
         <p>Gotta catch 'em all! ({list.length} Pokémon)</p>
     
       </div>
