@@ -43,7 +43,7 @@ export function PokemonList() {
           </div>
         </div>
         <footer className="pokedex-footer">
-          <p>© 2024 Pokédex - Powered by Pokémon API</p>
+          <p></p>
         </footer>
       </>
     )
@@ -70,7 +70,7 @@ export function PokemonList() {
   return (
     <>
       <div className="pokedex-header">
-        <h1>POKÉDEXX</h1>
+        <h1>POKÉDEX</h1>
         <p>Gotta catch 'em all! ({list.length} Pokémon)</p>
     
       </div>
