@@ -11,14 +11,27 @@ function App() {
   <>
 
   <Navebar />
-    <Routes>
-      <Route path="/" element={<PokemonList />} />
-      <Route path="/pokemon/:name" element={<PokemonDetailPage />} />
-      <Route path="/digimon/" element={<DigimonList  />} />
-      <Route path="/digimon/:id" element={<DigimonDetail />} />
+ 
 
-      <Route path="*" element={<h1>ROUTE NOT FOUND</h1>} />
-    </Routes></>
+
+<Routes>
+  <Route path="/" element={<PokemonList />} />
+  <Route path="/pokemon/:name" element={<PokemonDetailPage />} />
+
+  <Route path="/digimon" element={<DigimonList />} />
+  <Route path="/digimon/:id" element={<DigimonDetail />} />
+
+  <Route path="*" element={<h1>ROUTE NOT FOUND</h1>} />
+</Routes>
+
+
+
+
+
+</>
+
+
+
   )
 }
 
