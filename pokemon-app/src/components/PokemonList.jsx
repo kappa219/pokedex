@@ -80,7 +80,10 @@ export function PokemonList() {
         {filteredList.length === 0 && !loading ? (
           <div className="no-results">
             <p className="no-results-text">
-              Nessun Pokémon trovato per "{searchTerm}"
+                 <div> <h4>Nessun Pokémon trovato per "{searchTerm}"</h4></div>
+               
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/MissingNo.svg/960px-MissingNo.svg.png" alt="Pokéball" className="missingno-image" />
+          
             </p>
           </div>
         ) : (

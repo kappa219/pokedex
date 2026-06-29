@@ -10,7 +10,13 @@
   border: 1px solid #e8e8e8;
   cursor: pointer;
 }
-
+.title_description {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #c62020;
+  font-weight: 600;
+  margin-left: 20px;
+}
 .card-actions {
   margin-top: 12px;
   display: flex;

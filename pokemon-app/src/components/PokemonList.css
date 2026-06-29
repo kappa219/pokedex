@@ -20,6 +20,11 @@
   font-size: 0.95rem;
   margin-bottom: 40px;
 }
+.missingno-image {
+  width: 120px;
+  height: auto;
+  margin-bottom: 16px;
+}
 
 .pokemon-grid {
   display: grid;

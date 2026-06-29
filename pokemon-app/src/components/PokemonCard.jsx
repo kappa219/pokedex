@@ -69,6 +69,17 @@ export function PokemonCard({ pokemon, onClick }) {
           <p><strong>Weight:</strong> {pokemon.weight}</p>
           <p><strong>Order:</strong> {pokemon.order}</p>
           <p><strong>Grido:</strong> {pokemon.grido}</p>
+          
+<div className="description-container" style={{marginRight: "20px"}}>
+  <p className="title_description">
+    Description
+  </p>
+
+  <p className="description">
+    {pokemon.description}
+  </p>
+</div>
+
           <audio controls>
   <source src={pokemon.latest} type="audio/ogg" />
   Il tuo browser non supporta l'audio.

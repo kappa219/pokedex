@@ -23,6 +23,7 @@ export function PokemonDetail({ pokemon, onClose }) {
               <p><strong>Weight:</strong> {pokemon.weight}</p>
               <p><strong>Order:</strong> {pokemon.order}</p>
               <p><strong>Grido:</strong> {pokemon.grido}</p>
+              <p><strong>Description:</strong>  <p>{pokemon.description}</p> </p>
             </div>
             { (pokemon.latest || pokemon.legacy) && (
               <div className="pd-audio">

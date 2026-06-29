@@ -18,6 +18,7 @@
     "react": "^19.2.6",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.6",
+    "react-parallax-tilt": "^1.7.333",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.14.1"
   },

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPokemon } from '../store/pokemonSlice'
 import './PokemonDetail.css'
+import Tilt from 'react-parallax-tilt'
 
 export function PokemonDetailPage() {
   const { name } = useParams()
@@ -11,9 +12,9 @@ export function PokemonDetailPage() {
   const { single, loading, error } = useSelector((state) => state.pokemon)
 
   const [selectedImage, setSelectedImage] = useState(null)
-  const imageRef = useRef(null)
-  const rafRef = useRef(null)
-  const pointerRef = useRef({ x: 0, y: 0, rect: null })
+  //const imageRef = useRef(null)
+  //const rafRef = useRef(null)
+  //const pointerRef = useRef({ x: 0, y: 0, rect: null })
 
   useEffect(() => {
     if (name) dispatch(fetchPokemon(name))
@@ -23,11 +24,11 @@ export function PokemonDetailPage() {
     setSelectedImage(single?.image ?? null)
   }, [single])
 
-  useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [])
+  // useEffect(() => {
+  //   return () => {
+  //     if (rafRef.current) cancelAnimationFrame(rafRef.current)
+  //   }
+  // }, [])
 
   if (loading) {
     return (
@@ -102,44 +103,56 @@ export function PokemonDetailPage() {
 
       <div className="pd-page-content">
         <aside className="pd-aside">
-          <div
+          <Tilt
             className="pd-image"
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect()
-              pointerRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top, rect }
-              if (!rafRef.current) {
-                rafRef.current = requestAnimationFrame(() => {
-                  rafRef.current = null
-                  const img = imageRef.current
-                  if (!img) return
-                  const r = pointerRef.current.rect
-                  const w = r.width
-                  const h = r.height
-                  const px = (pointerRef.current.x / w) - 0.5
-                  const py = (pointerRef.current.y / h) - 0.5
-                  const rotateY = px * 12
-                  const rotateX = -py * 10
-                  const translateX = px * 12
-                  const translateY = py * 8
-                  img.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(${translateX}px, ${translateY}px, 0)`
-                })
-              }
-            }}
-            onMouseLeave={() => {
-              const img = imageRef.current
-              if (!img) return
-              img.style.transition = 'transform 420ms cubic-bezier(.2,.9,.2,1)'
-              img.style.transform = 'none'
-              setTimeout(() => { if (img) img.style.transition = '' }, 450)
-            }}
+            tiltMaxAngleX={25}
+            tiltMaxAngleY={25}
+            perspective={1200}
+            scale={1.12}
+            transitionSpeed={400}
+            gyroscope={true}
+          // onMouseMove={(e) => {
+          //   const rect = e.currentTarget.getBoundingClientRect()
+          //   pointerRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top, rect }
+          //   if (!rafRef.current) {
+          //     rafRef.current = requestAnimationFrame(() => {
+          //       rafRef.current = null
+          //       const img = imageRef.current
+          //       if (!img) return
+          //       const r = pointerRef.current.rect
+          //       const w = r.width
+          //       const h = r.height
+          //       const px = (pointerRef.current.x / w) - 0.5
+          //       const py = (pointerRef.current.y / h) - 0.5
+          //       const rotateY = px * 12
+          //       const rotateX = -py * 10
+          //       const translateX = px * 12
+          //       const translateY = py * 8
+          //       img.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(${translateX}px, ${translateY}px, 0)`
+          //     })
+          //   }
+          // }}
+          // onMouseLeave={() => {
+          //   const img = imageRef.current
+          //   if (!img) return
+          //   img.style.transition = 'transform 420ms cubic-bezier(.2,.9,.2,1)'
+          //   img.style.transform = 'none'
+          //   setTimeout(() => { if (img) img.style.transition = '' }, 450)
+          // }}
           >
-            <img ref={imageRef} src={selectedImage || p.image} alt={p.name} />
-          </div>
+
+            {/* <img ref={imageRef} src={selectedImage || p.image} alt={p.name} /> */}
+
+            <img src={selectedImage || p.image} alt={p.name}
+               style={{marginRight: "20px"}}
+            />
+          </Tilt>
           <div className="pd-sprites">
             {p.sprites && (
               <>
                 {p.sprites.front_default && (
                   <img
+                  style={{marginRight: "20px"}}
                     src={p.sprites.front_default}
                     alt="front"
                     className={`sprite-thumb ${selectedImage === p.sprites.front_default ? 'active' : ''}`}
@@ -190,6 +203,10 @@ export function PokemonDetailPage() {
         <main className="pd-main">
           <div className="pd-info">
             <h2>{p.name} (#{p.id})</h2>
+            <section className="pd-description">
+  <h3>Pokédex</h3>
+  <p>{p.description}</p>
+</section>
             <div className="pd-types">
               {p.types.map((t) => (
                 <span key={t} className={`type type-${t}`}>{t}</span>
@@ -215,7 +232,7 @@ export function PokemonDetailPage() {
               </div>
             </div>
 
-            <section className="pd-abilities">
+            <section className="pd-abilities" style={{ marginTop: "20px", marginBottom: "20px" }}>
               <h3>Abilities</h3>
               <div className="ability-list">
                 {p.abilities.map((a) => (
@@ -237,7 +254,7 @@ export function PokemonDetailPage() {
               ))}
             </section>
 
-            <section className="pd-moves">
+            <section className="pd-moves" style={{ marginTop: "20px", marginBottom: "20px" }}>
               <h3>Moves</h3>
               <div className="pd-move-list">
                 {p.moves.map((m) => (
