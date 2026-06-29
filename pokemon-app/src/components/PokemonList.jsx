@@ -39,7 +39,7 @@ export function PokemonList() {
         <div className="pokemon-list-container">
           <div className="loading-container">
             <div className="spinner"></div>
-            <p>Loading Pokémon...</p>
+            <p>caricamento del pokedex...</p>
           </div>
         </div>
         <footer className="pokedex-footer">
