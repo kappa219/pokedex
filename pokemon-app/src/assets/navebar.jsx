@@ -1,27 +1,31 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 function ColorSchemesExample() {
   return (
-    <>
-    
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/">Pokemon</Nav.Link>
+    <Navbar bg="dark" data-bs-theme="dark">
+      <Container>
 
-  <Nav.Link as={Link} to="/digimon">
+        <Navbar.Brand as={Link} to="/">
+          Pokemon
+        </Navbar.Brand>
+
+        <Nav className="me-auto">
+
+          <Nav.Link as={Link} to="/">
+            Pokemon
+          </Nav.Link>
+
+          <Nav.Link as={Link} to="/digimon">
             Digimon
           </Nav.Link>
-            {/* <Nav.Link href="/digimon">Digimon</Nav.Link> */}
-            {/* <Nav.Link href="/gioca">Gioca</Nav.Link> */}
-          </Nav>
-        </Container>
-      </Navbar>
-      <br />
-    </>
+
+        </Nav>
+
+      </Container>
+    </Navbar>
   );
 }
 
