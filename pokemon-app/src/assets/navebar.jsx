@@ -11,8 +11,12 @@ function ColorSchemesExample() {
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Pokemon</Nav.Link>
-            <Nav.Link href="/digimon/">Digimon</Nav.Link>
-            <Nav.Link href="/gioca">Gioca</Nav.Link>
+
+  <Nav.Link as={Link} to="/digimon">
+            Digimon
+          </Nav.Link>
+            {/* <Nav.Link href="/digimon">Digimon</Nav.Link> */}
+            {/* <Nav.Link href="/gioca">Gioca</Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>

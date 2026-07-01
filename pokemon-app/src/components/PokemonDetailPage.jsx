@@ -105,12 +105,13 @@ export function PokemonDetailPage() {
         <aside className="pd-aside">
           <Tilt
             className="pd-image"
-            tiltMaxAngleX={25}
-            tiltMaxAngleY={25}
+            tiltMaxAngleX={-40}
+            tiltMaxAngleY={-40}
             perspective={1200}
             scale={1.12}
             transitionSpeed={400}
             gyroscope={true}
+           
           // onMouseMove={(e) => {
           //   const rect = e.currentTarget.getBoundingClientRect()
           //   pointerRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top, rect }
@@ -142,10 +143,15 @@ export function PokemonDetailPage() {
           >
 
             {/* <img ref={imageRef} src={selectedImage || p.image} alt={p.name} /> */}
-
+ <div
+    style={{
+      transform: 'translateZ(40px)',
+    }}
+  >
             <img src={selectedImage || p.image} alt={p.name}
                style={{marginRight: "20px"}}
             />
+</div>
           </Tilt>
           <div className="pd-sprites">
             {p.sprites && (
