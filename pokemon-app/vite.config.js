@@ -7,7 +7,8 @@ export default defineConfig(({ mode }) => {
   // otherwise use root for local dev.
   const isProd = mode === 'production'
   return {
-    base: isProd ? '/pokedex/' : '/',
+    // base: isProd ? '/pokedex/' : '/',
+    base:'/pokedex/',
     plugins: [react()],
   }
 })
