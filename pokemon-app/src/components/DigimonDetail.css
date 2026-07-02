@@ -27,7 +27,7 @@
 .digimon-id {
   opacity: 0.6;
 }
-
+fdgg
 /* MAIN LAYOUT */
 .detail-main {
   display: flex;
@@ -44,11 +44,10 @@
   justify-content: center;
   align-items: center;
 }
-
 .detail-image-box img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
 }
 
 /* INFO */
@@ -97,4 +96,33 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+
+  .detail-main {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .detail-image-box img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail-page {
+    padding: 15px;
+  }
+
 }
