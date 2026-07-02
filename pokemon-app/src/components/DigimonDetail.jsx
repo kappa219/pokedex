@@ -63,7 +63,7 @@ export default function DigimonDetail() {
   return (
     <div className="detail-page">
 
-      <button className="back-btn" onClick={() => navigate('/')}>
+      <button className="back-btn" onClick={() => navigate('/digimon/')}>
         ← Back
       </button>
 

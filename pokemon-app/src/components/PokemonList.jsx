@@ -33,7 +33,7 @@ export function PokemonList() {
     return (
       <>
         <div className="pokedex-header">
-          <h1>POKÉDEXX</h1>
+          <h1>POKÉDEX</h1>
           <p>Gotta catch 'em all!</p>
         </div>
         <div className="pokemon-list-container">
