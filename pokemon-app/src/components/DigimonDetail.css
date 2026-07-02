@@ -27,9 +27,11 @@
 .digimon-id {
   opacity: 0.6;
 }
-fdgg
+
 /* MAIN LAYOUT */
 .detail-main {
+      flex-wrap: wrap;
+
   display: flex;
   gap: 30px;
   background: #1e293b;
