@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import './DigimonList.css'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function DigimonList() {
+  const navigate = useNavigate()
   const [digimons, setDigimons] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -55,7 +58,8 @@ export default function DigimonList() {
           <button
             className="digimon-button"
             onClick={() => {
-              window.location.href = `/digimon/${digimon.name}`
+             // window.location.href = `/pokedex/digimon/${digimon.name}`
+              navigate(`/digimon/${digimon.name}`)
             }}
           >
             View Details
