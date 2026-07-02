@@ -99,7 +99,7 @@ export function PokemonList() {
         )}
       </div>
       <footer className="pokedex-footer">
-        <p>TantaFame Companyin Mannoo</p>
+        <p>TantaFame Company Mannoo</p>
       </footer>
     </>
   )

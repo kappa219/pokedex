@@ -100,8 +100,19 @@ export function PokemonCard({ pokemon, onClick }) {
             >
               Dettagli
             </button>
-          </div>
 
+            <button
+              className="detail-button"
+              style={{marginLeft:"10px"}}
+              onClick={(e) => {
+                e.stopPropagation()
+              
+              }}
+              aria-label={`confronta ${pokemon.name}`}
+            >
+              Confronta
+            </button>
+          </div>
         </div>
       </div>
     </div>

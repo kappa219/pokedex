@@ -1,53 +1,125 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import './DigimonDetail.css'
 
 export default function DigimonDetail() {
-  const { id } = useParams()
+  const { name } = useParams()
+  const navigate = useNavigate()
+
   const [digimon, setDigimon] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    async function load() {
+    async function fetchDigimon() {
       try {
+        setLoading(true)
+
         const res = await fetch(
-          `https://digi-api.com/api/v1/digimon/${id}`
+          `https://digi-api.com/api/v1/digimon/${name}`
         )
+
+        if (!res.ok) throw new Error('Digimon not found')
 
         const data = await res.json()
         setDigimon(data)
       } catch (err) {
-        console.error(err)
+        setError(err.message)
       } finally {
         setLoading(false)
       }
     }
 
-    load()
-  }, [id])
+    fetchDigimon()
+  }, [name])
 
-  if (loading) return <h2>Loading...</h2>
-  if (!digimon) return <h2>Not found</h2>
+  const englishDescription =
+    digimon?.descriptions?.find(
+      d => d.language === 'en_us'
+    )?.description
 
-  const englishDesc = digimon.descriptions?.find(
-    (d) => d.language === 'en_us'
-  )?.description
+  if (loading) {
+    return (
+      <div className="detail-loading">
+        <div className="spinner"></div>
+        <p>Loading Digimon...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="detail-error">
+        <p>❌ {error}</p>
+        <button onClick={() => navigate('/')}>
+          Back
+        </button>
+      </div>
+    )
+  }
+
+  if (!digimon) return null
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>{digimon.name}</h1>
+    <div className="detail-page">
 
-      <img
-        src={digimon.images?.[0]?.href}
-        alt={digimon.name}
-        width="400"
-      />
+      <button className="back-btn" onClick={() => navigate('/')}>
+        ← Back
+      </button>
 
-      <p><b>Level:</b> {digimon.levels?.[0]?.level}</p>
-      <p><b>Type:</b> {digimon.types?.[0]?.type}</p>
+      {/* 🔥 HEADER */}
+      <div className="detail-header">
+        <h1>{digimon.name}</h1>
+        <span className="digimon-id">#{digimon.id}</span>
+      </div>
 
-      <p style={{ marginTop: 20 }}>
-        {englishDesc}
-      </p>
+      {/* 🔥 MAIN SECTION */}
+      <div className="detail-main">
+
+        {/* LEFT: IMAGE */}
+        <div className="detail-image-box">
+          <img
+            src={digimon.images?.[0]?.href}
+            alt={digimon.name}
+          />
+        </div>
+
+        {/* RIGHT: INFO */}
+        <div className="detail-info-box">
+
+          <div className="info-row">
+            <span>Level</span>
+            <strong>{digimon.levels?.[0]?.level || 'N/A'}</strong>
+          </div>
+
+          <div className="info-row">
+            <span>Type</span>
+            <strong>{digimon.types?.[0]?.type || 'N/A'}</strong>
+          </div>
+
+          <div className="info-row">
+            <span>Release</span>
+            <strong>{digimon.releaseDate || 'N/A'}</strong>
+          </div>
+
+          <div className="info-row">
+            <span>Attributes</span>
+            <strong>
+              {digimon.attributes?.map(a => a.attribute).join(', ') || 'N/A'}
+            </strong>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 🔥 DESCRIPTION */}
+      <div className="detail-description">
+        <h3>Description</h3>
+        <p>
+          {englishDescription || "No description available"}
+        </p>
+      </div>
+
     </div>
   )
 }

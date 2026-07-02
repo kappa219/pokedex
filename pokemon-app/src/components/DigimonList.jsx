@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './DigimonList.css'
 
 export default function DigimonList() {
   const [digimons, setDigimons] = useState([])
@@ -12,7 +13,6 @@ export default function DigimonList() {
         )
 
         const data = await res.json()
-
         setDigimons(data.content || [])
       } catch (err) {
         console.error('Errore API:', err)
@@ -24,41 +24,42 @@ export default function DigimonList() {
     loadDigimons()
   }, [])
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) {
+    return (
+      <div className="digimon-loading">
+        <div className="spinner"></div>
+        <p>Loading Digimons...</p>
+      </div>
+    )
+  }
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-        gap: '16px',
-        padding: '20px'
-      }}
-    >
+    <div className="digimon-container">
       {digimons.map((digimon) => (
-        <div
-          key={digimon.id}
-          style={{
-            background: '#fff',
-            padding: '12px',
-            borderRadius: '12px',
-            textAlign: 'center',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-          }}
-        >
-          <img
-            src={digimon.image || digimon?.images?.[0]?.href}
-            alt={digimon.name}
-            style={{ width: '120px', height: '120px', objectFit: 'contain' }}
-          />
+        <div key={digimon.id} className="digimon-card">
+          <div className="digimon-image-wrapper">
+            <img
+              src={digimon.image || digimon?.images?.[0]?.href}
+              alt={digimon.name}
+              className="digimon-image"
+            />
+          </div>
 
-          <h3>{digimon.name}</h3>
-          <p>#{digimon.id}</p>
+          <h3 className="digimon-name">{digimon.name}</h3>
+          <p className="digimon-id">#{digimon.id}</p>
 
-          {/* level opzionale */}
-          <p style={{ fontSize: '12px' }}>
+          <p className="digimon-level">
             {digimon.levels?.[0]?.level}
           </p>
+
+          <button
+            className="digimon-button"
+            onClick={() => {
+              window.location.href = `/digimon/${digimon.name}`
+            }}
+          >
+            View Details
+          </button>
         </div>
       ))}
     </div>
